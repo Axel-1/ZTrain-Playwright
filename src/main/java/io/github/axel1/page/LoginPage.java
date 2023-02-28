@@ -5,17 +5,18 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 
 
-public class LoginPage {
-    private Page page;
-    private Locator emailInput;
-    private Locator passwordInput;
-    private Locator loginButton;
+public class LoginPage extends BasePage {
+    private final Locator emailInput;
+    private final Locator passwordInput;
+    private final Locator loginButton;
+    private final Locator signUpButton;
 
     public LoginPage(Page page) {
-        this.page = page;
+        super(page);
         this.emailInput = page.getByPlaceholder("Email");
         this.passwordInput = page.getByPlaceholder("Mot de passe");
         this.loginButton = page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Connexion").setExact(true));
+        this.signUpButton = page.locator(".style_link__unbWN");
     }
 
     public void navigate() {
@@ -31,12 +32,8 @@ public class LoginPage {
         loginButton.click();
     }
 
-    public String url() {
-        return page.url();
-    }
-
-    public void close() {
-        page.close();
+    public void clickSignUpButton() {
+        signUpButton.click();
     }
 
     public String getErrorMessage() {
