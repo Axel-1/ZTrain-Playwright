@@ -5,7 +5,6 @@ import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.BrowserType;
 import com.microsoft.playwright.Playwright;
 import io.cucumber.java.*;
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -34,11 +33,11 @@ public class LoginSteps {
     @Given("User launched ZTrain application")
     public void user_launched_ztrain_application() {
         loginPage = new LoginPage(context.newPage());
+        loginPage.navigate();
     }
 
     @When("User logged in the app using username {string} and password {string}")
     public void user_logged_in_the_app_using_username_and_password(String username, String password) {
-        loginPage.navigate();
         loginPage.login(username, password);
     }
 
@@ -52,11 +51,18 @@ public class LoginSteps {
         assertNotEquals("https://ztrain-web.vercel.app/home", loginPage.getPage().url());
     }
 
-    @Then("User should not be able to log in")
-    public void logInUnsuccessful() {
+    @Then("User should not be able to log in with incorrect email or password error message")
+    public void logInUnsuccessfulIncorrectEmailOrPassword() {
         assertNotEquals("https://ztrain-web.vercel.app/home", loginPage.getPage().url());
         assertEquals("Email ou mot de passe incorrect", loginPage.getErrorMessage());
     }
+
+    @Then("User should not be able to log in with invalid email message")
+    public void logInUnsuccessfulInvalidEmail() {
+        assertNotEquals("https://ztrain-web.vercel.app/home", loginPage.getPage().url());
+        assertEquals("Le format de l'email est invalid", loginPage.getErrorMessage());
+    }
+
 
     @After
     public void after() {
