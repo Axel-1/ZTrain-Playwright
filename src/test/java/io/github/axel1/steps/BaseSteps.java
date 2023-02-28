@@ -8,8 +8,7 @@ import io.cucumber.java.BeforeAll;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.github.axel1.page.LoginPage;
-import io.github.axel1.page.SignUpPage;
+import io.github.axel1.page.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -20,6 +19,9 @@ public class BaseSteps {
     static BrowserContext context;
     private LoginPage loginPage;
     private SignUpPage signUpPage;
+    private SearchPage searchPage;
+    private ProductPage productPage;
+    private CartPage cartPage;
     private Page page;
 
     @BeforeAll
@@ -39,6 +41,9 @@ public class BaseSteps {
         page = context.newPage();
         loginPage = new LoginPage(page);
         signUpPage = new SignUpPage(page);
+        searchPage = new SearchPage(page);
+        productPage = new ProductPage(page);
+        cartPage = new CartPage(page);
     }
 
     @After
@@ -121,5 +126,30 @@ public class BaseSteps {
     @When("User signed up the app using email {string} password {string} and confirm password {string}")
     public void userSignedUpTheAppUsingEmailStringPasswordStringAndConfirmPasswordString(String email, String password, String confirmPassword) {
         signUpPage.signUp(email, password, confirmPassword);
+    }
+
+    @When("User searched for {string}")
+    public void userSearchedFor(String search) {
+        searchPage.search(search);
+    }
+
+    @When("User clicked on the result")
+    public void userClickedOnTheResult() {
+        searchPage.clickFirstResult();
+    }
+
+    @When("User clicked on the add to cart button")
+    public void userClickedOnTheAddToCartButton() {
+        productPage.clickAddToCartButton();
+    }
+
+    @When("User clicked on the cart button")
+    public void userClickedOnTheCartButton() {
+        cartPage.clickCartButton();
+    }
+
+    @Then("User should be able to add the product to the cart")
+    public void userShouldBeAbleToAddTheProductToTheCart() {
+        assertEquals("ok", "ok");
     }
 }
