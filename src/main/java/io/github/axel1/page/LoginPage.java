@@ -4,7 +4,6 @@ import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 
-import java.util.Locale;
 
 public class LoginPage {
     private Page page;
@@ -32,8 +31,12 @@ public class LoginPage {
         loginButton.click();
     }
 
-    public Page getPage() {
-        return page;
+    public String url() {
+        return page.url();
+    }
+
+    public void close() {
+        page.close();
     }
 
     public String getErrorMessage() {
