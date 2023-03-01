@@ -9,6 +9,7 @@ public class SignUpPage extends BasePage {
     private final Locator passwordInput;
     private final Locator confirmPasswordInput;
     private final Locator signUpButton;
+    private final Locator signUpForm;
 
     public SignUpPage(Page page) {
         super(page);
@@ -16,10 +17,12 @@ public class SignUpPage extends BasePage {
         this.passwordInput = page.locator("#password_register");
         this.confirmPasswordInput = page.locator("#confirm_password_register");
         this.signUpButton = page.locator("#btn_register");
+        this.signUpForm = page.locator("#style_content_form__yXJox");
     }
 
-    public void navigate() {
-        page.navigate("https://ztrain-web.vercel.app/auth/register");
+    @Override
+    public String getPath() {
+        return "/auth/register";
     }
 
     public void signUp(String email, String password, String confirmPassword) {
@@ -30,6 +33,10 @@ public class SignUpPage extends BasePage {
 
     public void clickSignUpButton() {
         signUpButton.click();
+    }
+
+    private boolean isSignUpFormVisible() {
+        return signUpForm.isVisible();
     }
 
     public String getErrorMessage() {

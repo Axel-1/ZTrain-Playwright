@@ -16,6 +16,11 @@ public class CartPage extends BasePage {
         this.cart = page.locator("#style_card_wrapper__hrc1I");
     }
 
+    @Override
+    public String getPath() {
+        return "/home";
+    }
+
     public void clickCartButton() {
         cartButton.click();
     }
@@ -23,6 +28,11 @@ public class CartPage extends BasePage {
     public boolean isCartEmpty() {
         page.waitForLoadState(LoadState.NETWORKIDLE);
         return emptyCart.isVisible();
+    }
+
+    public boolean isCartVisible() {
+        page.waitForLoadState(LoadState.NETWORKIDLE);
+        return cart.isVisible();
     }
 
     public boolean cartContains(String productName) {
