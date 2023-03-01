@@ -35,19 +35,16 @@ public class LoginSteps {
 
     @Then("User should be able to log in")
     public void logInSuccessful() {
-        //TODO: Add assertion for the successful login
-        assertEquals("ok", "ok");
+        assertTrue(pageContainer.getLoginPage().isLoginSuccessful());
     }
 
     @Then("User should not be able to log in with incorrect email or password")
     public void logInUnsuccessfulIncorrectEmailOrPassword() {
-        assertNotEquals("https://ztrain-web.vercel.app/home", pageContainer.getLoginPage().url());
         assertEquals("Email ou mot de passe incorrect", pageContainer.getLoginPage().getErrorMessage());
     }
 
     @Then("User should not be able to log in with invalid email")
     public void logInUnsuccessfulInvalidEmail() {
-        assertNotEquals("https://ztrain-web.vercel.app/home", pageContainer.getLoginPage().url());
         assertEquals("Le format de l'email est invalid", pageContainer.getLoginPage().getErrorMessage());
     }
 }

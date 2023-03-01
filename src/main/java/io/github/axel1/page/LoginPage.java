@@ -3,6 +3,7 @@ package io.github.axel1.page;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
+import com.microsoft.playwright.options.LoadState;
 
 
 public class LoginPage extends BasePage {
@@ -49,5 +50,9 @@ public class LoginPage extends BasePage {
 
     public boolean isLoginFormVisible() {
         return loginForm.isVisible();
+    }
+    public boolean isLoginSuccessful() {
+        page.waitForURL("https://ztrain-web.vercel.app/home");
+        return page.url().equals("https://ztrain-web.vercel.app/home");
     }
 }

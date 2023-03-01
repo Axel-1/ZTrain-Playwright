@@ -2,6 +2,7 @@ package io.github.axel1.page;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.LoadState;
 
 public class SignUpPage extends BasePage {
 
@@ -41,5 +42,10 @@ public class SignUpPage extends BasePage {
 
     public String getErrorMessage() {
         return page.textContent(".style_messageError__LxTAG");
+    }
+
+    public boolean isLoginSuccessful() {
+        page.waitForLoadState(LoadState.NETWORKIDLE);
+        return page.url().equals("https://ztrain-web.vercel.app/home");
     }
 }

@@ -45,3 +45,12 @@ Feature: Login
     Then User should be able to see the Login form
     When User clicked on the login button
     Then User should not be able to log in with invalid email
+
+  @login
+  Scenario: Login to ZTrain Application
+    Given User launched ZTrain application
+    When User navigated to the Login page
+    Then User should be able to see the Login form
+    When User logged in the app using e-mail "test@test.test" and password "12345678"
+    And User clicked on the login button
+    Then User should be able to log in

@@ -17,7 +17,7 @@ public class BaseSteps {
     @BeforeAll
     public static void beforeAll() {
         playwright = Playwright.create();
-        browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false).setSlowMo(200));
+        browser = playwright.webkit().launch(new BrowserType.LaunchOptions().setHeadless(false).setSlowMo(200));
     }
 
     @AfterAll
@@ -25,14 +25,14 @@ public class BaseSteps {
         browser.close();
     }
 
-    @Before
+    @Before("not @alreadyLoggedIn")
     public void before() {
         context = BaseSteps.browser.newContext();
         page = context.newPage();
         pageContainer.init(page);
     }
 
-    @After
+    @After("not @login")
     public void after() {
         if (page != null) {
             page.close();
