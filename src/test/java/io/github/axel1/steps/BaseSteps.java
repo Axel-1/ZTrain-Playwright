@@ -5,6 +5,7 @@ import io.cucumber.java.After;
 import io.cucumber.java.AfterAll;
 import io.cucumber.java.Before;
 import io.cucumber.java.BeforeAll;
+import io.cucumber.java.en.Given;
 
 public class BaseSteps {
     static Playwright playwright;
@@ -36,5 +37,10 @@ public class BaseSteps {
         if (page != null) {
             page.close();
         }
+    }
+
+    @Given("User launched ZTrain application")
+    public void userLaunchedZtrainApplication() {
+        pageContainer.navigateBasePage();
     }
 }

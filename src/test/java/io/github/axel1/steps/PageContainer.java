@@ -50,4 +50,8 @@ public class PageContainer {
     public SignUpPage getSignUpPage() {
         return signUpPage;
     }
+
+    public void navigateBasePage() {
+        page.navigate("https://ztrain-web.vercel.app");
+    }
 }
